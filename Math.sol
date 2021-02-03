@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity 0.7.5;
 
 /*
 #    Copyright (C) 2017  alianse777
@@ -19,7 +19,7 @@ pragma solidity ^0.4.0;
 
 
 contract Math{
-   /**
+   /*
     * @dev Compute square root of x
     * @param x 
     * @return sqrt(x)
@@ -34,7 +34,7 @@ contract Math{
        return uint(n);
    }
 	
-    /**
+    /*
      * @dev Compute modular exponential (x ** k) % m
      * @param x k m
      * @return uint

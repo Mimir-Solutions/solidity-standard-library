@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity 0.7.5;
 
 /*
 #    Copyright (C) 2017  alianse777
@@ -29,7 +29,7 @@ contract STDMemory {
     * @param data is an uint[] array to referrence
     * @return ptr - pointer to array
     */
-    function m_ref_uint(uint [] data) internal pure returns (uint ptr) {
+    function m_ref_uint(uint[] memory data) internal pure returns (uint ptr) {
         assembly {
             let retptr := data
             ptr := retptr
@@ -40,7 +40,7 @@ contract STDMemory {
     * @param ptr size 
     * @return array of given size
     */
-    function m_unref_uint(uint ptr, uint size) internal pure returns(uint []) {
+    function m_unref_uint(uint ptr, uint size) internal pure returns(uint[] memory) {
         uint [] memory data = new uint[](size);
         assembly {
             data := ptr
@@ -65,9 +65,9 @@ contract STDMemory {
     // Memory int [] pointer functions
     /** @dev Returns memory address of int[] object
     * @param data is an int[] array to referrence
-    * @return pointer to array
+    * @return ptr pointer to array
     */
-    function m_ref_int(int [] data) internal pure returns (uint ptr) {
+    function m_ref_int(int[] memory data) internal pure returns (uint ptr) {
         assembly {
             let retptr := data
             ptr := retptr
@@ -78,7 +78,7 @@ contract STDMemory {
     * @param ptr size
     * @return array of given size
     */
-    function m_unref_int(uint ptr, uint size) internal pure returns(int []) {
+    function m_unref_int(uint ptr, uint size) internal pure returns(int[] memory) {
         int [] memory data = new int[](size);
         assembly {
             data := ptr

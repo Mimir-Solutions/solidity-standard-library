@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity 0.7.5;
 /*
 #    Copyright (C) 2017  alianse777
 
@@ -63,9 +63,9 @@ contract Double
     /**
     * @dev Creates new double instanse a.b
     * @param integral fractional
-    * @return double(integral.fractional)
+    * @return data double(integral.fractional)
     */
-    function double_t(int integral, uint fractional) internal pure returns (double data) {
+    function double_t(int integral, uint fractional) internal pure returns (double  memory data) {
         if(integral < 0)
         {
             data.sign = true;
@@ -76,7 +76,7 @@ contract Double
         data.f = fractional;
     }
 
-    function convert(double data) internal view returns (uint r)
+    function convert(double  memory data) internal view returns (uint r)
     {
         uint256 integer = data.part*dot;
         assert(integer / data.part == dot);
@@ -84,7 +84,7 @@ contract Double
         assert(r - data.f == integer);
     }
 
-    function normalize(uint num, uint exp, bool sign) internal view returns (double data)
+    function normalize(uint num, uint exp, bool sign) internal view returns (double  memory data)
     {
         uint d = 10**exp;
         uint part = num / d;
@@ -115,7 +115,7 @@ contract Double
     * @param lhs rhs
     * @return lhs + rhs
     */
-    function double_add(double lhs, double rhs) internal view returns (double)
+    function double_add(double  memory lhs, double  memory rhs) internal view returns (double memory)
     {
         uint l = convert(lhs);
         uint r = convert(rhs);
@@ -140,7 +140,7 @@ contract Double
      * @param lhs rhs
      * @return lhs - rhs
      */
-    function double_sub(double lhs, double rhs) internal view returns (double)
+    function double_sub(double  memory lhs, double  memory rhs) internal view returns (double memory )
     {
         uint l = convert(lhs);
         uint r = convert(rhs);
@@ -180,7 +180,7 @@ contract Double
      * @param lhs rhs
      * @return lhs * rhs
      */
-    function double_mult(double lhs, double rhs) internal view returns (double)
+    function double_mult(double  memory lhs, double  memory rhs) internal view returns (double memory )
     {
         uint l = convert(lhs);
         uint r = convert(rhs);
@@ -191,7 +191,7 @@ contract Double
      * @param lhs rhs
      * @return lhs / rhs
      */
-    function double_div(double lhs, double rhs) internal view returns (double)
+    function double_div(double  memory lhs, double  memory rhs) internal view returns (double memory )
     {
         uint l = convert(lhs);
         uint r = convert(rhs);
@@ -203,7 +203,7 @@ contract Double
     //  Equality
     */
 
-    function double_lt(double lhs, double rhs) internal pure returns (bool)
+    function double_lt(double  memory lhs, double  memory rhs) internal pure returns (bool)
     {
         if(lhs.sign && !rhs.sign)
         {
@@ -220,23 +220,23 @@ contract Double
         return lhs.part < rhs.part;
     }
 
-    function double_le(double lhs, double rhs) internal pure returns (bool)
+    function double_le(double  memory lhs, double  memory rhs) internal pure returns (bool)
     {
         return (double_lt(lhs, rhs) || double_eq(lhs, rhs));
     }
 
-    function double_eq(double lhs, double rhs) internal pure returns (bool)
+    function double_eq(double  memory lhs, double  memory rhs) internal pure returns (bool)
     {
         return (lhs.part == rhs.part && lhs.f == rhs.f && rhs.sign == lhs.sign);
     }
 
-    function double_ge(double lhs, double rhs) internal pure returns (bool)
+    function double_ge(double  memory lhs, double  memory rhs) internal pure returns (bool)
     {
         return (double_eq(lhs, rhs) || double_gt(lhs, rhs));
 
     }
 
-    function double_gt(double lhs, double rhs) internal pure returns (bool)
+    function double_gt(double  memory lhs, double  memory rhs) internal pure returns (bool)
     {
         if(lhs.sign && !rhs.sign)
         {
@@ -258,7 +258,7 @@ contract Double
     // Conversation API
     */
 
-    function double_from_array(int [] data) internal pure returns (double [])
+    function double_from_array(int[] memory data) internal pure returns (double[] memory)
     {
         uint r_index = 0;
         double [] memory result = new double[](data.length / 2);
@@ -271,7 +271,7 @@ contract Double
         return result;
     }
 
-    function double_to_array(double [] data) internal pure returns (int [])
+    function double_to_array(double[] memory data) internal pure returns (int[] memory)
     {
         uint index = 0;
         int [] memory result = new int [](data.length * 2);
@@ -287,9 +287,9 @@ contract Double
         return result;
     }
 
-    function reshape_int(int [2] data) internal pure returns (double [])
+    function reshape_int(int[2] memory data) internal pure returns (double[] memory)
     {
-        double [] memory res = new double[](data.length);
+        double[] memory res = new double[](data.length);
         for(uint i;i < data.length;i++)
         {
             res[i] = double_t(data[i], 0);

@@ -1,4 +1,5 @@
-pragma solidity ^0.4.0;
+// SPDX-License-Identifier: GPL-1.0-or-later
+pragma solidity 0.7.5;
 
 /*
 #    Copyright (C) 2017  alianse777
@@ -17,7 +18,7 @@ pragma solidity ^0.4.0;
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/** Array wraper
+/* Array wraper
 * min() - returns minimal array element
 * max() - returns maximal array element
 * sum() - returns sum of all array elements
@@ -32,14 +33,18 @@ pragma solidity ^0.4.0;
 
 contract UintArray {
     uint[] private data;
-    function UintArray(uint[] _data) public {
-        data = new uint[](_data.length);
-        for(uint i = 0;i < _data.length;i++) {
-            data[i] = _data[i];
-        }
-    }
 
-    /**
+
+    // Commented out as Solidity 0.7.5 does not allow for functions with the same name as a contract.
+    // Commented out as this replicates the functionality of the set function.
+    // function UintArray(uint[] memory _data) public {
+    //     data = new uint[](_data.length);
+    //     for(uint i = 0;i < _data.length;i++) {
+    //         data[i] = _data[i];
+    //     }
+    // }
+
+    /*
      * @dev Returns minimal element in array
      * @return uint
      */
@@ -53,7 +58,7 @@ contract UintArray {
         return minimal;
     }
     
-    /**
+    /*
      * @dev Returns minimal element's index
      * @return uint
      */
@@ -67,7 +72,7 @@ contract UintArray {
         return minimal;
     }
 
-    /**
+    /*
      * @dev Returns maximal element in array
      * @return uint
      */
@@ -81,7 +86,7 @@ contract UintArray {
         return maximal;
     }
     
-    /**
+    /*
      * @dev Returns maximal element's index
      * @return uint
      */
@@ -95,7 +100,7 @@ contract UintArray {
         return maximal;
     }
     
-    /**
+    /*
      * @dev Compute sum of all elements
      * @return uint
      */
@@ -107,19 +112,19 @@ contract UintArray {
         return S;
     }
 
-    /**
+    /*
      * @dev assign new array pointer from _data
      * @param _data is array to assign
      */
-    function set(uint [] _data) public {
+    function set(uint[] memory _data) public {
         data = _data;
     }
 
-    /**
+    /*
      * @dev Get the contents of array
      * @return uint[]
      */
-    function get() public view returns (uint[]) {
+    function get() public view returns (uint[] memory) {
         return data;
     }
     
@@ -141,7 +146,7 @@ contract UintArray {
         return true;
     }
     
-    /**
+    /*
      * @dev Sort the array
      */
     function sort() public {
@@ -157,11 +162,14 @@ contract UintArray {
 
 contract IntArray {
     int [] private data;
-    function IntArray(int [] _data) public {
-        data = _data;
-    }
 
-    /**
+    // Commented out as Solidity does not allow for functions to share their name with a contract.
+    // Commented out as this function dulicates the functionality if the set function.
+    // function intArray(int[] memory _data) public {
+    //     data = _data;
+    // }
+
+    /*
      * @dev Returns minimal element in array
      * @return int
      */
@@ -175,7 +183,7 @@ contract IntArray {
         return minimal;
     }
     
-    /**
+    /*
      * @dev Returns minimal element's index
      * @return uint
      */
@@ -189,7 +197,7 @@ contract IntArray {
         return minimal;
     }
 
-    /**
+    /*
      * @dev Returns maximal element in array
      * @return int
      */
@@ -203,7 +211,7 @@ contract IntArray {
         return maximal;
     }
     
-    /**
+    /*
      * @dev Returns maximal element's index
      * @return uint
      */
@@ -217,7 +225,7 @@ contract IntArray {
         return maximal;
     }
 
-    /**
+    /*
      * @dev Compute sum of all elements
      * @return int
      */
@@ -229,11 +237,11 @@ contract IntArray {
         return S;
     }
 
-    function set(int [] _data) public {
+    function set(int[] memory _data) public {
         data = _data;
     }
 
-    function get() public view returns (int []) {
+    function get() public view returns (int[] memory) {
         return data;
     }
     
@@ -255,7 +263,7 @@ contract IntArray {
         return true;
     }
     
-    /**
+    /*
      * @dev Sort the array
      */
     function sort() public {
